@@ -1,3 +1,10 @@
+'''
+Kepler-442b
+Author: Rudolf M.
+Created for Python Programming competition
+April-May 2020
+'''
+
 import pygame
 import random
 import math
@@ -833,12 +840,13 @@ class button():
                 pygame.mixer.Sound.play(button_pressed)
                 pygame.time.delay(300)
                 if action != None:
-                    global shmenu, shmenu1, shsettings, shintro, Mode1, question
+                    global shmenu, shmenu1, shsettings, shintro, Mode1, question, run
                     global fight, kamni1, kamni2, kamni, kamni_inner_list, viruses, rakety, home, locked, health, green, red, health1, green1, red1, player, bg, stored_player, stored_bg, stored_level
                     #checking what each button does
                     if action == "quit":
                         pygame.time.delay(200)
-                        pygame.quit()
+                        run = False
+                        shmenu = False
                     elif action == "start_game":
                         shintro = False
                         shmenu1 = False

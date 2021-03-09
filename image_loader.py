@@ -54,7 +54,7 @@ little_corona = pygame.image.load("images/coronochka.png")
 scene = pygame.image.load("images/scene.jpg")
 arrow_r = pygame.image.load("images/arrow.png")
 arrow_l = pygame.transform.flip(arrow_r, True, False)
-arrow_ar = pygame.image.load("images/arrow_a.png")
+arrow_ar = pygame.image.load("images/arrow_a.PNG")
 arrow_al = pygame.transform.flip(arrow_ar, True, False)
 
 #LISTS FOR ANIMATIONS
@@ -118,7 +118,7 @@ explosion = []
 for image in expl_not_scaled:
     correct = pygame.transform.scale(image, (110, 157))
     explosion.append(correct)
-intro_bg_not_resized = [pygame.image.load("images/intro0.JPG"), pygame.image.load("images/intro1.JPG"), pygame.image.load("images/intro2.JPG"), pygame.image.load("images/intro3.JPG")]
+intro_bg_not_resized = [pygame.image.load("images/intro0.JPG"), pygame.image.load("images/intro1.JPG"), pygame.image.load("images/intro2.JPG"), pygame.image.load("images/intro3.jpg")]
 intro_bg = []
 for image in intro_bg_not_resized:
     correct = pygame.transform.scale(image, (720, 480))
