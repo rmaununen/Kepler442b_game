@@ -36,17 +36,18 @@ def print_text(message, x, y, font_col, font_type, font_size):
     font_type1 = pygame.font.Font(font_type, font_size)
     text = font_type1.render(message, True, font_col)
     win.blit(text, (x, y))
-    pygame.display.update()
 
 
 #FUNCTION THAT PAUSES THE GAME
 def pause():
     paused = True
+    global run
     while paused:
         #check for game quit
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                pygame.quit() 
+                paused = False
+                run = False
         print_text("PAUSED", 350, 220, (0, 255, 0), "fonts/Pixeboy.ttf", 50)
         print_text("Press ENTER to continue", 150, 290, (0, 255, 0), "fonts/Pixeboy.ttf ", 20)
         #check for un-pause
@@ -59,12 +60,13 @@ def pause():
 
 #FUNCTION THAT SHOWS MAIN MENU
 def show_menu(win, image):
-    global shmenu, cy, dy, up, up2, dpy, dpx, cpy, cpx
+    global shmenu, cy, dy, up, up2, dpy, dpx, cpy, cpx, run
     while shmenu:
         #check for game quit
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                pygame.quit()
+                run = False
+                shmenu = False
         #buttons
         start_but = button(130, 25, (178, 236, 166), (0, 255, 0))
         levels_but = button(155, 25, (178, 236, 166), (0, 255, 0))
@@ -116,11 +118,12 @@ def show_menu(win, image):
         
 #FUNCTION THAT SHOWS SETTINGS MENU
 def show_settings(win, image):
-    global shsettings, sliderx1, sliderx2
+    global shsettings, sliderx1, sliderx2, run
     while shsettings:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                pygame.quit()
+                shsettings = False
+                run = False
         #buttons
         mus_vol_but = slider(150, 8, 7, sliderx1, (170, 160, 179), (209, 97, 254), sliding1)
         eff_vol_but = slider(150, 8, 7, sliderx2, (170, 160, 179), (209, 97, 254), sliding2)
@@ -161,12 +164,13 @@ def show_settings(win, image):
 
 #FUNCTIONS THAT SHOWS "SELECT LEVEL" MENU
 def show_scene_menu(win, image):
-    global shmenu1
+    global shmenu1, run
     while shmenu1:
         #check for game quit
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                pygame.quit()
+                run = False
+                shmenu1 = False
         #buttons
         scene0 = button(90, 63, None, (178, 236, 166))
         scene1 = button(90, 63, None, (178, 236, 166))
@@ -308,18 +312,18 @@ def intro(win, image):
             if event.type == pygame.QUIT:
                 shintro = False
                 run = False
-                pygame.quit()     
 
 
 
 #FUNCTION THAT SHOWS TUTORIALS IN BETWEEN LEVELS (ALSO USED FOR GAME OUTRO)        
 def tutorial(lvl):
-    global tut, tut_count, fire_animcount
+    global tut, tut_count, fire_animcount, run
     while tut:
         #check for game quit
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                pygame.quit()  
+                tut = False
+                run = False
         #buttons, background, static players
         arrowR = intro_button(80, 61, arrow_r, arrow_ar)
         arrowL = intro_button(80, 61, arrow_l, arrow_al)
@@ -712,7 +716,7 @@ def resurrect():
     while question:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                pygame.quit()
+                run = False
         yes = button(40, 30, (178, 236, 166), (0, 255, 0))
         no = button(40, 30, (248, 161, 166), (255, 0, 0))
         win.blit(bg, (0, 0))
@@ -859,6 +863,7 @@ class button():
                         shintro = True
                         intro(win, intro_bg[0])
                     elif action == "show_menu":
+                        shmenu1 = False
                         shmenu = True
                         shsettings = False
                         pygame.mixer.Sound.play(musici)
